@@ -1,7 +1,5 @@
 library x_common;
 
-/// A Calculator.
-class Calculator {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
-}
+import 'package:logger/logger.dart';
+
+part 'utils/logger.dart';
