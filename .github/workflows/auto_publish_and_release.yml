@@ -1,0 +1,67 @@
+name: Auto Publish and Release
+
+on: push
+# on:
+# schedule:
+#   - cron: "0 0 * * *" # 每天运行一次
+# workflow_dispatch: # 允许手动触发
+
+jobs:
+  check-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.x" # 使用最新的稳定版本
+
+      - name: ">> Dart package <<"
+        id: package_publisher
+        uses: k-paxian/dart-package-publisher@master
+        with:
+          credentialJson: ${{ secrets.CREDENTIAL_JSON }}
+          accessToken: ${{ secrets.OAUTH_ACCESS_TOKEN }}
+          refreshToken: ${{ secrets.OAUTH_REFRESH_TOKEN }}
+          skipTests: true
+          flutter: true
+          force: true
+
+      # - name: Install jq
+      #   run: sudo apt-get install jq
+
+      # - name: Get current version
+      #   id: get_version
+      #   run: echo "version=$(grep 'version:' pubspec.yaml | awk '{print $2}' | tr -d "'")" >> $GITHUB_OUTPUT
+
+      # - name: Check latest version on pub.dev
+      #   id: pub_latest
+      #   run: |
+      #     PACKAGE_NAME=$(grep 'name:' pubspec.yaml | awk '{print $2}' | tr -d "'")
+      #     LATEST=$(curl -s "https://pub.dev/api/packages/$PACKAGE_NAME" | jq -r '.latest.version')
+      #     echo "latest=$LATEST" >> $GITHUB_OUTPUT
+
+      # - name: Compare versions
+      #   id: compare_versions
+      #   run: |
+      #     CURRENT="${{ steps.get_version.outputs.version }}"
+      #     LATEST="${{ steps.pub_latest.outputs.latest }}"
+      #     if [ "$CURRENT" != "$LATEST" ]; then
+      #       echo "update_needed=true" >> $GITHUB_OUTPUT
+      #     else
+      #       echo "update_needed=false" >> $GITHUB_OUTPUT
+      #     fi
+
+      - name: Create Release
+        if: steps.package_publisher.outputs.success == 'true'
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.package_publisher.outputs.localVersion }}
+          release_name: Release ${{ steps.package_publisher.outputs.localVersion }}
+          body: |
+            Automated release for version ${{ steps.package_publisher.outputs.localVersion }}
+          draft: false
+          prerelease: false
