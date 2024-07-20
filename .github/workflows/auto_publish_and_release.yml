@@ -55,7 +55,7 @@ jobs:
 
       - name: Create Release
         if: steps.package_publisher.outputs.success == 'true'
-        uses: kuloud/create-release@v1
+        uses: kuloud/create-release@v1.0.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
