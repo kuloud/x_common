@@ -1,3 +1,5 @@
+[![Auto Publish and Release](https://github.com/kuloud/x_common/actions/workflows/auto_publish_and_release.yml/badge.svg)](https://github.com/kuloud/x_common/actions/workflows/auto_publish_and_release.yml)
+
 A collection of commonly used flutter tool classes
 
 ## Features
