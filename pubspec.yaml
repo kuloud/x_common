@@ -1,5 +1,5 @@
 name: x_common
-description: "A collection of commonly used flutter tool classes"
+description: "A collection of common flutter tool classes, archived from common projects to subtree maintenance"
 version: 1.0.2
 homepage: https://github.com/kuloud/x_common
 issue_tracker: https://github.com/kuloud/x_common/issues
@@ -15,7 +15,7 @@ topics:
   - tools
 
 environment:
-  sdk: '>=3.3.2 <4.0.0'
+  sdk: ">=3.3.2 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
