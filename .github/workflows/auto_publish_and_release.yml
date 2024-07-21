@@ -6,6 +6,10 @@ on: push
 #   - cron: "0 0 * * *" # 每天运行一次
 # workflow_dispatch: # 允许手动触发
 
+permissions:
+  packages: write
+  contents: write
+
 jobs:
   check-and-release:
     runs-on: ubuntu-latest
@@ -55,7 +59,7 @@ jobs:
 
       - name: Create Release
         if: steps.package_publisher.outputs.success == 'true'
-        uses: actions/create-release@v1
+        uses: elgohr/Github-Release-Action@v5
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
