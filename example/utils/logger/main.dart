@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:x_common/x_common.dart';
+import 'package:x_common/utils/logger.dart';
 
 void main() {
   runApp(const DemoApp());

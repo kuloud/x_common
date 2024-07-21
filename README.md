@@ -21,7 +21,7 @@ samples, guidance on mobile development, and a full API reference.
 
 ### logger
 ```dart
-import 'package:x_common/x_common.dart';
+import 'package:x_common/utils/logger.dart';
 
 logger.d("Logger is working!");
 ```
