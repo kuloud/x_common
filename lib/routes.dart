@@ -1,4 +1,4 @@
-part of 'package:x_common/x_common.dart';
+import 'package:flutter/material.dart';
 
 typedef PathWidgetBuilder = Widget Function(BuildContext, String?);
 

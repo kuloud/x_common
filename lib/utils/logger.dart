@@ -1,4 +1,4 @@
-part of 'package:x_common/x_common.dart';
+import 'package:logger/logger.dart';
 
 Logger logger = Logger(
   printer: PrettyPrinter(
