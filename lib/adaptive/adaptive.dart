@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:x_common/global.dart';
 
+/// 根据宽度约束布局最大宽度
 double adaptesPageWidth(BoxConstraints constraints) {
   double maxWidth = constraints.maxWidth;
   if (constraints.maxWidth > kExtraLargeWidthBreakpoint) {
