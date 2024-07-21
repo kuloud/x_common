@@ -59,12 +59,12 @@ jobs:
 
       - name: Create Release
         if: steps.package_publisher.outputs.success == 'true'
-        uses: elgohr/Github-Release-Action@v5
+        uses: kuloud/Github-Release-Action@@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: v${{ steps.package_publisher.outputs.localVersion }}
-          release_name: Release ${{ steps.package_publisher.outputs.localVersion }}
+          title: Release ${{ steps.package_publisher.outputs.localVersion }}
           body: |
             Automated release for version ${{ steps.package_publisher.outputs.localVersion }}
           draft: false
